@@ -12,7 +12,7 @@ pub mod responses;
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the clans with the most experience", body = ClanLeaderboard),
+        (status = 200, description = "Everything went well. Returns a ClanLeaderboard", body = ClanLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -38,7 +38,7 @@ pub async fn clans(state: &State<BBDataPointer>) -> Result<ClanLeaderboard, Erro
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most kills", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -64,7 +64,7 @@ pub async fn kills(state: &State<BBDataPointer>) -> Result<PlayerLeaderboard, Er
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the players that have healed the most", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -90,7 +90,7 @@ pub async fn heal(state: &State<BBDataPointer>) -> Result<PlayerLeaderboard, Err
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the longest kills", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -116,7 +116,7 @@ pub async fn longest_kills(state: &State<BBDataPointer>) -> Result<PlayerLeaderb
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most objectives completed", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -142,7 +142,7 @@ pub async fn objectives_complete(state: &State<BBDataPointer>) -> Result<PlayerL
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most revives", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -168,7 +168,7 @@ pub async fn revives(state: &State<BBDataPointer>) -> Result<PlayerLeaderboard, 
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most roadkills", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -194,7 +194,7 @@ pub async fn roadkills(state: &State<BBDataPointer>) -> Result<PlayerLeaderboard
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most vehicle repairs", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -220,7 +220,7 @@ pub async fn vehicle_repairs(state: &State<BBDataPointer>) -> Result<PlayerLeade
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most vehicles destroyed", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
@@ -246,7 +246,7 @@ pub async fn vehicles_destroyed(state: &State<BBDataPointer>) -> Result<PlayerLe
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most experience", body = PlayerLeaderboard),
+        (status = 200, description = "Everything went well. Returns a PlayerLeaderboard", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]

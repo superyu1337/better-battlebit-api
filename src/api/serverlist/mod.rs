@@ -11,7 +11,7 @@ use crate::{error::{ApiError, ErrorResponse}, BBDataPointer};
 #[utoipa::path(
     context_path = "/api",
     responses(
-        (status = 200, description = "Gets the serverlist", body = ServerList),
+        (status = 200, description = "Everything went well. Returns a ServerList", body = ServerList),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
