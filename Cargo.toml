@@ -4,7 +4,6 @@ version = "0.1.0"
 authors = ["Janek S. <development@superyu.xyz>"]
 edition = "2021"
 homepage = "https://bbb.superyu.xyz"
-reposiory = "https://github.com/superyu1337/better-battlebit-api"
 readme = "README.md"
 description = "A better API for Battlebit"
 license-file = "LICENSE.txt"
