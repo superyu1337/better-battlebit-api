@@ -60,11 +60,11 @@ pub async fn kills(state: &State<BBDataPointer>) -> Result<PlayerLeaderboard, Er
 
 /// Most heal
 /// 
-/// Gets a leaderboard with the players that have the most heal.
+/// Gets a leaderboard with the players that have healed the most.
 #[utoipa::path(
     context_path = "/api/leaderboards",
     responses(
-        (status = 200, description = "Gets leaderboard for the most heal", body = PlayerLeaderboard),
+        (status = 200, description = "Gets leaderboard for the players that have healed the most", body = PlayerLeaderboard),
         (status = 500, description = "Internal Server Error.", body = ErrorResponse)
     )
 )]
