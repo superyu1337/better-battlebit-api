@@ -1,7 +1,7 @@
 [package]
 name = "better-battlebit-api"
 version = "0.1.0"
-authors = ["Janek S. <development@superyu.xyz>"]
+authors = ["Superyu1337 <development@superyu.xyz>"]
 edition = "2021"
 homepage = "https://bbb.superyu.xyz"
 readme = "README.md"

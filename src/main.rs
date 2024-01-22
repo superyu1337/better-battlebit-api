@@ -50,13 +50,13 @@ async fn fetch_api_data(bbdata: BBDataPointer) {
         }
 
         drop(data);
-
         sleep(rocket::tokio::time::Duration::from_secs(60)).await;
     }
 }
 
 #[derive(OpenApi)]
 #[openapi(
+    info(license(name = "DON'T BE A DICK PUBLIC LICENSE")),
     paths(
         leaderboards::kills,
         leaderboards::heal,
