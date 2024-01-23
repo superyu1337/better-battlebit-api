@@ -6,22 +6,27 @@ use serde::Serialize;
 use utoipa::ToSchema;
 
 #[derive(Serialize, ToSchema)]
-pub struct PlayerLeaderboard {
+pub struct PlayerLeaderboardResponse {
     #[schema(example = 200)]
+    /// HTTP Response code. This is here for bad HTTP libraries.
     status: u16,
     data: Vec<Player>,
+    /// Unix timestamp when the data was fetched.
+    #[schema(example = 1706010047)]
+    stamp: u64,
 }
 
-impl PlayerLeaderboard {
-    pub fn new(data: Vec<Player>) -> Self {
+impl PlayerLeaderboardResponse {
+    pub fn new(data: Vec<Player>, stamp: u64) -> Self {
         Self {
             status: Status::Ok.code,
             data: data.clone(),
+            stamp
         }
     }
 }
 
-impl<'a> Responder<'a, 'a> for PlayerLeaderboard {
+impl<'a> Responder<'a, 'a> for PlayerLeaderboardResponse {
     fn respond_to(self, _: &'a rocket::Request) -> rocket::response::Result<'a> {
         let body = serde_json::to_string(&self)
             .expect("failed to serialize response to json");
@@ -35,22 +40,27 @@ impl<'a> Responder<'a, 'a> for PlayerLeaderboard {
 }
 
 #[derive(Serialize, ToSchema)]
-pub struct ClanLeaderboard {
+pub struct ClanLeaderboardResponse {
     #[schema(example = 200)]
+    /// HTTP Response code. This is here for bad HTTP libraries.
     status: u16,
     data: Vec<Clan>,
+    /// Unix timestamp when the data was fetched.
+    #[schema(example = 1706010047)]
+    stamp: u64,
 }
 
-impl ClanLeaderboard {
-    pub fn new(data: Vec<Clan>) -> Self {
+impl ClanLeaderboardResponse {
+    pub fn new(data: Vec<Clan>, stamp: u64) -> Self {
         Self {
             status: Status::Ok.code,
             data: data.clone(),
+            stamp
         }
     }
 }
 
-impl<'a> Responder<'a, 'a> for ClanLeaderboard {
+impl<'a> Responder<'a, 'a> for ClanLeaderboardResponse {
     fn respond_to(self, _: &'a rocket::Request) -> rocket::response::Result<'a> {
         let body = serde_json::to_string(&self)
             .expect("failed to serialize response to json");

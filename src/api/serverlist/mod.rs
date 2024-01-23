@@ -1,9 +1,9 @@
 pub mod response;
 
-use response::ServerList;
+use response::ServerListResponse;
 use rocket::State;
 
-use crate::{error::{ApiError, ErrorResponse}, BBDataPointer};
+use crate::BBDataPointer;
 
 /// Serverlist
 /// 
@@ -11,20 +11,16 @@ use crate::{error::{ApiError, ErrorResponse}, BBDataPointer};
 #[utoipa::path(
     context_path = "/api",
     responses(
-        (status = 200, description = "Everything went well. Returns a ServerList", body = ServerList),
-        (status = 500, description = "Internal Server Error.", body = ErrorResponse)
+        (status = 200, description = "Returns a ServerListResponse", body = ServerListResponse),
     )
 )]
 #[get("/serverlist")]
-pub async fn serverlist(state: &State<BBDataPointer>) -> Result<ServerList, ErrorResponse> {
+pub async fn serverlist(state: &State<BBDataPointer>) -> ServerListResponse {
     let bbdata = state.read().await;
-    let serverlist = bbdata.server_list().ok_or(
-        ApiError::Unknown(String::from("The serverlist was nonexistent"))
-    )?;
 
-    if serverlist.is_empty() {
-        Err(ErrorResponse::from(ApiError::Unknown(String::from("The serverlist was empty"))))
+    if let Some(serverlist) = bbdata.server_list() {
+        ServerListResponse::new(serverlist.clone(), bbdata.server_list_stamp)
     } else {
-        Ok(ServerList::new(serverlist.clone()))
+        ServerListResponse::new(Vec::new(), bbdata.server_list_stamp)
     }
 }

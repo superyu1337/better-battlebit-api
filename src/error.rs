@@ -9,7 +9,27 @@ use utoipa::ToSchema;
 pub enum ApiError {
     #[error("unknown error")]
     #[response(status = 500, content_type = "json")]
-    Unknown(String),
+    Unknown(Error),
+}
+
+#[derive(Serialize, ToSchema, Debug)]
+pub struct Error {
+    #[schema(example = "The leaderboard was none")]
+    message: String,
+    code: u16,
+}
+
+impl<'a> Responder<'a, 'a> for Error {
+    fn respond_to(self, _: &'a rocket::Request) -> rocket::response::Result<'a> {
+        let body = serde_json::to_string(&self)
+            .expect("failed to serialize response to json");
+
+        Ok(Response::build()
+            .header(ContentType::JSON)
+            .status(Status::new(self.code))
+            .sized_body(body.len(), Cursor::new(body))
+            .finalize())
+    }
 }
 
 #[derive(Serialize, ToSchema)]
@@ -17,8 +37,7 @@ pub enum ApiError {
 pub struct ErrorResponse {
     #[schema(example = 500)]
     status: u16,
-    #[schema(example = "The server did an oopsie")]
-    message: String,
+    error: Error,
 }
 
 impl<'a> Responder<'a, 'a> for ErrorResponse {
@@ -40,7 +59,7 @@ impl From<ApiError> for ErrorResponse {
         match value {
             ApiError::Unknown(e) => Self {
                 status: Status::InternalServerError.code,
-                message: e,
+                error: e
             },
         }
     }
