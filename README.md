@@ -2,7 +2,8 @@
 
 **A Better Battlebit API written in Rust**
 
-#### [Running Instance](https://bbb.superyu.xyz)
+## Instances
+- https://bbb.superyu.xyz
 
 ---
 
