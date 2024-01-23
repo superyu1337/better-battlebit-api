@@ -44,18 +44,20 @@ impl BBData {
     }
 
     pub async fn update(&mut self) -> Result<(), battlebit_api::Error> {
-        if let Ok(new_lb) = self.api_client.leaderboard().await {
-            self.leaderboard = Some(new_lb);
-            self.leaderboard_stamp = self.get_stamp();
-        } else {
-            // Todo: Logging the error
+        match self.api_client.leaderboard().await {
+            Ok(new_lb) => {
+                self.leaderboard = Some(new_lb);
+                self.leaderboard_stamp = self.get_stamp();
+            },
+            Err(e) => eprintln!("Couldn't fetch leaderboard: {}", e),
         }
 
-        if let Ok(new_sl) = self.api_client.server_list().await {
-            self.server_list = Some(new_sl);
-            self.server_list_stamp = self.get_stamp();
-        } else {
-            // Todo: Logging the error
+        match self.api_client.server_list().await {
+            Ok(new_sl) => {
+                self.server_list = Some(new_sl);
+                self.server_list_stamp = self.get_stamp();
+            },
+            Err(e) => eprintln!("Couldn't fetch serverlist: {}", e),
         }
 
         Ok(())
