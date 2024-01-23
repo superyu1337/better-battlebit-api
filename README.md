@@ -33,3 +33,6 @@ Current issues I've encountered:
 ## How does it work?
 This API server requests data from the official API every minute, this data is parsed into structs using [my Rust battlebit API library](https://github.com/superyu1337/battlebit-api).  
 The OpenAPI specification is built at compile time, and thanks to [utoipa](https://github.com/juhaku/utoipa) is also served through Swagger, Redoc and Rapidoc. This ensures that the Specification is always in line with what the server responds.
+
+## Limitations
+As said earlier, the limitation with this API is that the data is at a maximum, a minute old. (Unless the official API goes down)
