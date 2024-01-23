@@ -53,7 +53,7 @@ impl BBData {
 
         if let Ok(new_sl) = self.api_client.server_list().await {
             self.server_list = Some(new_sl);
-            self.leaderboard_stamp = self.get_stamp();
+            self.server_list_stamp = self.get_stamp();
         } else {
             // Todo: Logging the error
         }
