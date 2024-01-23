@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use api::{leaderboards, serverlist};
 use battlebit_api::{BBApi, Leaderboard, ServerData};
-use rocket::tokio::{sync::RwLock, time::sleep};
+use rocket::{response::content::RawHtml, tokio::{sync::RwLock, time::sleep}};
 
 
 use utoipa::OpenApi;
@@ -91,6 +91,16 @@ async fn fetch_api_data(bbdata: BBDataPointer) {
 )]
 struct ApiDoc;
 
+#[get("/")]
+pub async fn index() -> RawHtml<&'static str> {
+    RawHtml(include_str!("static/index.html"))
+}
+
+#[get("/favicon.ico")]
+pub async fn favicon() -> Vec<u8> {
+    include_bytes!("static/favicon.ico").to_vec()
+}
+
 #[rocket::main]
 async fn main() {
     let bbdata = Arc::new(RwLock::new(BBData {
@@ -108,7 +118,7 @@ async fn main() {
         .mount("/", RapiDoc::new("/docs/openapi.json").path("/rapidoc"))
         .mount("/", Redoc::with_url("/redoc", ApiDoc::openapi()))
         .manage(ApiDoc::openapi())
-        .mount("/", rocket::fs::FileServer::from("./static"))
+        .mount("/", routes![index, favicon])
         .mount("/api", routes![
             serverlist::serverlist
         ])
