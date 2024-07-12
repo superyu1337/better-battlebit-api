@@ -2,12 +2,6 @@
 
 **A Better Battlebit API written in Rust**
 
-## Instances
-- https://bbb.superyu.xyz
-
----
-
-
 ## Running
 
 ```bash
